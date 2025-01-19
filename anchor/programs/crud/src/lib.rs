@@ -25,7 +25,7 @@ pub mod crud {
 }
 
 #[derive(Accounts)]
-#[instruction(title: String. message: String)]
+#[instruction(title: String, message: String)]
 pub struct CreateJournalEntry<'info>{
   #[account(mut)]
   pub owner: Signer<'info>,
