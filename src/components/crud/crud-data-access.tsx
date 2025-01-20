@@ -41,15 +41,18 @@ export function useCrudProgram() {
   });
 
   const createEntry = useMutation<string, Error, JournalEntryArgs>({
-    mutationKey: ["crud", "create", { cluster }],
-    mutationFn: async ({ title, message, owner }) => {
-      const [journalEntryAddress] = await PublicKey.findProgramAddressSync(
-        [Buffer.from(title), owner.toBuffer()],
-        programId
-      );
-
+    mutationKey: ["journalEntry", "create", { cluster }],
+    mutationFn: async ({ title, message }) => {
       return program.methods.createJournalEntry(title, message).rpc();
     },
+    onSuccess: (tx)=> {
+      transactionToast(tx);
+      accounts.refetch();
+    },
+    onError: (error) => {
+      toast.error(`Failed to create journal entry: ${error.message}`);
+    },
+
   });
 
   return {
@@ -64,7 +67,8 @@ export function useCrudProgram() {
 export function useCrudProgramAccount({ account }: { account: PublicKey }) {
   const { cluster } = useCluster();
   const transactionToast = useTransactionToast();
-  const { program, accounts, programId } = useCrudProgram();
+  const { program, accounts } = useCrudProgram();
+  console.log(program, accounts, "From journalEntry Program")
 
   const accountQuery = useQuery({
     queryKey: ["crud", "fetch", { cluster, account }],
@@ -72,8 +76,8 @@ export function useCrudProgramAccount({ account }: { account: PublicKey }) {
   });
 
   // const decrementMutation = useMutation({
-  //   mutationKey: ['crud', 'decrement', { cluster, account }],
-  //   mutationFn: () => program.methods.decrement().accounts({ crud: account }).rpc(),
+  //   mutationKey: ['journalEntry', 'decrement', { cluster, account }],
+  //   mutationFn: () => program.methods.decrement().accounts({ journalEntry: account }).rpc(),
   //   onSuccess: (tx) => {
   //     transactionToast(tx)
   //     return accountQuery.refetch()
@@ -81,14 +85,9 @@ export function useCrudProgramAccount({ account }: { account: PublicKey }) {
   // })
 
   const updateEntry = useMutation<string, Error, JournalEntryArgs>({
-    mutationKey: ["crud", "update", { cluster }],
-    mutationFn: async ({ title, message, owner }) => {
-      const [journalEntryAddress] = await PublicKey.findProgramAddressSync(
-        [Buffer.from(title), owner.toBuffer()],
-        programId
-      );
-
-      return program.methods.updateJournalEntry(title, message).rpc();
+    mutationKey: ["journalEntry", "update", { cluster, account }],
+    mutationFn: async ({ title, message }) => {
+      return program.methods.updateJournalEntry(title, message).accounts({}).rpc();
     },
     onSuccess: (signature) => {
       transactionToast(signature);
@@ -100,13 +99,14 @@ export function useCrudProgramAccount({ account }: { account: PublicKey }) {
   });
 
   const deleteEntry = useMutation({
-    mutationKey: ["crud", "deleteEntry", { cluster, account }],
-    mutationFn: (title: string) =>
-      program.methods.deleteJournalEntry(title).rpc(),
+    mutationKey: ["journalEntry", "delete", { cluster }],
+    mutationFn: (title: string) =>{
+     return program.methods.deleteJournalEntry(title).rpc()
+    },
     onSuccess: (tx) => {
       transactionToast(tx);
-      return accounts.refetch();
-    },
+      accounts.refetch();
+    }
   });
 
   return {
