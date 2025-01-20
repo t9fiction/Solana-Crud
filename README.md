@@ -49,6 +49,7 @@ cd <project-name>
 
 2. Install dependencies
 ```bash
+
 # Install Anchor dependencies
 cd program
 anchor build
