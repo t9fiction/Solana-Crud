@@ -2,7 +2,7 @@ Let me create a comprehensive README.md file for your Solana CRUD dApp:
 
 ```markdown
 # Solana Journal CRUD dApp
-
+```
 A decentralized journaling application built on Solana blockchain that demonstrates basic CRUD (Create, Read, Update, Delete) operations.
 This project serves as a learning resource for building on Solana using Anchor framework and Next.js.
 
