@@ -1,5 +1,3 @@
-Let me create a comprehensive README.md file for your Solana CRUD dApp:
-
 ```markdown
 # Solana Journal CRUD dApp
 ```
@@ -154,5 +152,3 @@ This README provides:
 4. Project structure
 5. Development guidelines
 6. Error handling information
-
-Would you like me to expand on any section or add additional information?
