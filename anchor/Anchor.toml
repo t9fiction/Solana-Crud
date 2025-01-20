@@ -8,11 +8,14 @@ skip-lint = false
 [programs.localnet]
 crud = "7b3fq4KnprFX3tAiPaS6xspbCPaBbUfdH8kPPoPb1QSb"
 
+[programs.devnet]
+crud = "7b3fq4KnprFX3tAiPaS6xspbCPaBbUfdH8kPPoPb1QSb"  # Replace with your program ID if you want to reference it
+
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "Localnet"
+cluster = "devnet"  # Change this to devnet
 wallet = "~/.config/solana/id.json"
 
 [scripts]
