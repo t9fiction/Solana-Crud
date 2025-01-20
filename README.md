@@ -93,10 +93,11 @@ npm run dev
 ```
 ├── anchor/                # Solana program (smart contract)
 │   ├── program
-        ├── src/               
-│       │   └── lib.rs         # Program logic
-│       ├── Cargo.toml
-│       └── Anchor.toml
+│       ├── cruc/
+│           ├── src/               
+│           │   └── lib.rs         # Program logic
+│           ├── Cargo.toml
+│           └── Anchor.toml
 ├── app/                    # Next.js frontend
 │   ├── src/
 │   │   ├── components/    # React components
