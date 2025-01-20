@@ -7,7 +7,14 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primaryBg: '#1D232A',   // Primary background color
+        secondaryBg: '#A6ADBB', // Secondary background color
+        primary: '#1E40AF',        // Main color
+        secondary: '#64748B',   // Secondary color
+      },
+    },
   },
   plugins: [require('daisyui')],
 };
