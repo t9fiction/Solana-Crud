@@ -19,7 +19,7 @@ export function UiLayout({ children, links }: { children: ReactNode; links: { la
       <div className="navbar dark:text-neutral-content flex-col md:flex-row space-y-2 md:space-y-0">
         <div className="flex-1">
           <Link className="btn btn-ghost normal-case text-xl" href="/">
-            <Image src="/logo.png" alt="Logo" width={120} height={60} />
+            <Image src="/logo.png" alt="Logo" width={200} height={120} />
           </Link>
           <ul className="menu menu-horizontal px-1 space-x-2">
             {links.map(({ label, path }) => (
